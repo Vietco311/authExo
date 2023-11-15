@@ -128,7 +128,7 @@
                                     </div>
                                     <!-- Column -->
                                     <div class="w-full md:w-1/2 min-h-full flex justify-start items-center p-4 text-gray-100">
-                                      Date de depart : <span class="ml-1" id="date_up<?php echo($res['id_produit']); ?>"></span>
+                                      Date de mise à jour : <span class="ml-1" id="date_up<?php echo($res['id_produit']); ?>"></span>
                                     </div>
                                   </div>
 

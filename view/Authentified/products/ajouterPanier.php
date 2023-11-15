@@ -27,16 +27,17 @@
 		}
 
 		//Verifier si le même produit existe donc ajouter ou non
-		$sql = "SELECT * from panier where id_produit = :id";
+		$sql = "SELECT * from panier where id_produit = :id AND id_user = :user";
 		$stmt = $pdo->prepare($sql);
-		$stmt->bindParam('id', $_GET['id']);
+		$stmt->bindParam(':id', $_GET['id']);
+		$stmt->bindParam(':user', $user);
 		$stmt->execute();
 		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$panier = $result[0];
 		$id_panier = $panier['id'];
 		$user = $_SESSION['id_user'];
 
-		if ($result == null || $result['id_user'] != $user)
+		if (empty($result))
 		{
 			//Insertion des données dans la table panier
 			$sql = "INSERT INTO panier(quantite, id_user, id_produit) values(:quantite, :user, :produit)";
@@ -47,10 +48,11 @@
 			$stmt->execute();
 		}else
 		{
-			$sql = "UPDATE panier set quantite = quantite + :quantite where id = :id_panier" and where;
+			$sql = "UPDATE panier set quantite = quantite + :quantite where id_produit = :id_produit AND id_user = :id_user";
 			$stmt = $pdo->prepare($sql);
 			$stmt->bindParam(':quantite', $quantite);
-			$stmt->bindParam(':id_panier', $id_panier);
+			$stmt->bindParam(':id_produit', $produit['id_produit']);
+			$stmt->bindParam(':id_user', $user);
 			$stmt->execute();
 		}
 

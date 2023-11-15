@@ -20,7 +20,6 @@
   </nav>
 
       <?php 
-      session_start();
       if (isset($_SESSION['success']))
       {
         echo '<p class="text-green-700 font-bold text-center text-shadow underline" id="success">L\'utilisateur a bien été enregistré !<p>';
